@@ -529,8 +529,13 @@ class DownloaderParser:
           columns = 80  # but not really important.
           EOL = "\r"
         else:
-          rows, columns = list(map(int, os.popen('stty size', 'r'
-              ).read().split()))
+          try:
+            rows, columns = list(map(int, os.popen('stty size', 'r'
+                ).read().split()))
+          except ValueError:
+            rows    = 100
+            columns = 80
+
           EOL = "\x1b[G"
         if seconds_elapsed == 0:
             seconds_elapsed = 1
@@ -1036,7 +1041,7 @@ def main():
             dest="verbose", help = "be verbose", default=False)
     parser.add_option("-c", "--cache-dir", action="store", dest="dir",
             help="set cache directory [default: %default]",
-            default=str(os.path.expanduser('~')) + "/.blockfinder/")
+            default="/usr/src/app/.blockfinder/")
     parser.add_option("--user-agent", action="store", dest="ua",
             help=('provide a User-Agent which will be used when '
                   'fetching delegation files [default: "%default"]'),
