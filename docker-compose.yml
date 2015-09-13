@@ -7,4 +7,3 @@ blockfinder:
 
 build:
     build: .
-    entrypoint: /usr/src/app/blockfinder
