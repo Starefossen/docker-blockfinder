@@ -4,3 +4,7 @@ blockfinder:
     volumes:
         - .:/usr/src/app
     entrypoint: /usr/src/app/blockfinder
+
+build:
+    build: .
+    entrypoint: /usr/src/app/blockfinder
